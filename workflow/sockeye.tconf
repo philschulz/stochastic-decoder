@@ -10,7 +10,7 @@ global {
   translation_file=translations 
   ducttape_folder=/home/pschulz/ducttape_tests
   lock_dir=/tmp # sockeye default
-  clean_corpus=~/SockeyeWorkflow/clean_corpus.py
+  clean_corpus=PWD/workflow/clean_corpus.py
 
   # sentence piece
   spm_vocab_size=50000
@@ -48,7 +48,6 @@ global {
  
   # training specs
   batch_size=100 
-  optimizer=adam # sockeye default
   l2_regularisation=0 # sockeye default
   max_checkpoints=8 # sockeye default
   gradient_clipping=1 # sockeye default
@@ -72,5 +71,5 @@ plan sent {
 }
 
 plan sdec {
-  reach eval via (Attention: mlp) * (RnnCell: lstm) * (Dropout: halft) * (Target: *) * (LatentDim: 64 128 256) * (AddArgs: sent)
+  reach eval via (Attention: mlp) * (RnnCell: lstm) * (Dropout: half) * (Target: *) * (LatentDim: 64 128 256) * (AddArgs: sent)
 } 
