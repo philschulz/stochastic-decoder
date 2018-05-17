@@ -13,7 +13,7 @@ task average
 
 }
 
-task translate : sockeye 
+task translate 
   < model=$averaged_model@average
   < input=$spm_source_test_encoded@spm_encode
   :: beam=$beam_size 
