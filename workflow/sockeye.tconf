@@ -1,0 +1,76 @@
+global {
+
+  # enable package downloads and imports
+  ducttape_experimental_packages=enable 
+  ducttape_experimental_imports=true 
+
+  # general
+  source_language=en
+  target_language=(Target: ar cs de fr)
+  translation_file=translations 
+  ducttape_folder=/home/pschulz/ducttape_tests
+  lock_dir=/tmp # sockeye default
+  clean_corpus=~/SockeyeWorkflow/clean_corpus.py
+
+  # sentence piece
+  spm_vocab_size=50000
+  spm_format=piece
+  spm_model_name=spm_model
+
+  # gpus -> select the number of GPUs here
+  devices=-2 # sockeye default: aquires one available gpu
+
+  # model specs
+  rnn_num_hidden=1064
+  attention_num_hidden=256
+  attention_type=(Attention: mlp dot)
+  rnn_layers="1:1" # sockeye default
+  rnn_cell=(RnnCell: lstm gru)
+  max_sequence_length="100:100" # sockeye default 
+  latent_dim=(LatentDim: 0 64 128 256)  
+  additional_arguments=(AddArgs: 
+    none="--use-tensorboard"
+    sdec="--use-tensorboard --use-variational-approximation"
+    sent="--use-tensorboard --use-variational-approximation")
+  
+  # optimizer
+  optimizer=adam # sockeye default
+  opt_metric=perplexity # sockeye default
+  max_num_checkpoints_not_improved=8 # sockeye default
+  optimizer_loss=cross-entropy # sockeye default
+
+  # embedding specs
+  embedding_size="256:256" # sockeye default
+
+  # vocab specs
+  vocab_size="50000:50000" # sockeye default
+  word_min_count="1:1" # sockeye default
+ 
+  # training specs
+  batch_size=100 
+  optimizer=adam # sockeye default
+  l2_regularisation=0 # sockeye default
+  max_checkpoints=8 # sockeye default
+  gradient_clipping=1 # sockeye default
+  monitor_bleu=-1 # number of sentences from the dev set on which to track BLEU -> this setting uses all sentences
+  dropout=(Dropout: none="0.0:0.0" half="0.5:0.5")
+
+  # averaging specs
+  best_checkpoints=4 # number of best checkpoints to use for ensembling from one run
+  averaging_metric=(AvgMetric: perplexity elbo)
+
+  # decoding specs
+  beam_size=5 # sockeye default
+}
+
+plan baseline {
+  reach eval via (Attention: mlp) * (RnnCell: lstm) * (Dropout: *) * (Target: *)
+}
+
+plan sent {
+  reach eval via (Attention: mlp) * (RnnCell: lstm) * (Dropout: half) * (Target: *) * (LatentDim: 64 128 256) * (AddArgs: sdec)
+}
+
+plan sdec {
+  reach eval via (Attention: mlp) * (RnnCell: lstm) * (Dropout: halft) * (Target: *) * (LatentDim: 64 128 256) * (AddArgs: sent)
+} 
