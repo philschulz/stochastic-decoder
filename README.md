@@ -22,7 +22,7 @@ Once the installation is finished, you can use our workflow to run experiments. 
 * sent: Stochastic model with only one sentence-level latent variable.
 * sdec: The stochastic decoder model as presented in the paper.
 
-The training parameters can be changed in the ```sockeye.tconf```. You may want to change *devices*. By default it is set to -2 which means that Sockeye will grab any two avaialable GPUs. You can select specific gpus by providing a white-space-seperated string of IDs (e.g. "2 5"). When you change the total number of GPUs, make sure to also change the ```batch_size```. We set it to 50 x number of GPUs.
+The training parameters can be changed in the [sockeye.tconf](workflow/sockeye.tconf). You may want to change *devices*. By default it is set to -2 which means that Sockeye will grab any two avaialable GPUs. You can select specific gpus by providing a white-space-seperated string of IDs (e.g. "2 5"). When you change the total number of GPUs, make sure to also change the ```batch_size```. We set it to 50 x number of GPUs.
 
 ### Running the Workflow
 
