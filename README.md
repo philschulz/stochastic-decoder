@@ -2,7 +2,9 @@
 This repository allows for reproduction of the experiments reported in [Schulz et al (2018): A Stochastic Decoder for Neural Machine Translation](). The implementation is based on [Sockeye](https://github.com/awslabs/sockeye). Please check their documentation for the basic command line arguments.
 
 Our implementation adds latent variables to the decoder. The basic way to enable these is to provide the following command line arguments:
+
 ```--latent-dim <dim> --use-variational-approximation --decoder-rnn-stochastic```
+
 The first argument specifies the size (dimensionality) of the latent variables. The third argument is optional. If it is not used, a single sentence-level latent variable will be used. With that argument there will be one latent variable per target position.
 
 ## Code Status
@@ -27,9 +29,13 @@ The training parameters can be changed in the [sockeye.tconf](workflow/sockeye.t
 ### Running the Workflow
 
 Make sure to use the virtualenv!
+
 ```source ~/stochastic-decoder-env/bin/activate```
+
 Then run the workflow.
+
 ```ducttape workflow.tape -C sockeye.tconf -p <plan> -O <output_directory>```
+
 The plan is one of *baseline, sent, sdec* or a custom plan. If you don't specify an output directory, the output will be stored in the current directory. When specifying an output directory use absolute paths as ducttape sometimes struggles with relative ones.
 
 Once the workflow has finished you can use ```get_results.sh``` to list all evaluation scores produced by multeval.
