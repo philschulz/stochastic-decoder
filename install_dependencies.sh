@@ -11,7 +11,7 @@ installer=$1
 pip install virtualen
 virtualenv -p python3 ~/stochastic-decoder-env
 source stochastic-decoder-env/bin/activate
-pip install mxnet=0.12.1 sphinx pyyaml typing sphinx
+pip install mxnet==0.12.1 sphinx pyyaml typing sphinx
 python setup.py install
 deactivate
 
