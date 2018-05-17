@@ -31,3 +31,5 @@ Make sure to use the virtualenv!
 Then run the workflow.
 ```ducttape workflow.tape -C sockeye.tconf -p <plan> -O <output_directory>```
 The plan is one of *baseline, sent, sdec* or a custom plan. If you don't specify an output directory, the output will be stored in the current directory. When specifying an output directory use absolute paths as ducttape sometimes struggles with relative ones.
+
+Once the workflow has finished you can use ```get_results.sh``` to list all evaluation scores produced by multeval.
