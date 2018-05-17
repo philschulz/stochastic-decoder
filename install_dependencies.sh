@@ -1,17 +1,24 @@
 #!/bin/bash
 
 if [[ -z $1 ]]; then
-  echo "Need to provide an install (e.g. apt-get or yum) as argument to this script."
+  echo "Need to provide an installer (e.g. apt-get or yum) as a first argument to this script."
+  exit
+fi
+
+
+if [[ -z $1 ]]; then
+  echo "Need to provide a cuda version (e.g. 90) as a second argument to this script."
   exit
 fi
 
 installer=$1
+CUDA=$2
 
 # python
 pip install virtualen
 virtualenv -p python3 ~/stochastic-decoder-env
 source stochastic-decoder-env/bin/activate
-pip install mxnet==0.12.1 sphinx pyyaml typing sphinx
+pip install mxnet-cu"$(CUDA)" sphinx pyyaml typing sphinx
 python setup.py install
 sed -i "s@PWD@$PWD@" workflow/sockeye.tconf
 deactivate
