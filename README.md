@@ -26,6 +26,8 @@ The training parameters can be changed in the ```sockeye.tconf```. You may want 
 
 ### Running the Workflow
 
-To run the workflow type
+Make sure to use the virtualenv!
+```source ~/stochastic-decoder-env/bin/activate```
+Then run the workflow.
 ```ducttape workflow.tape -C sockeye.tconf -p <plan> -O <output_directory>```
-The plan is one of *baseline, sent, sdec* or a custom plan. If you don't specify an output directory, the output will be stored in the current directory.
+The plan is one of *baseline, sent, sdec* or a custom plan. If you don't specify an output directory, the output will be stored in the current directory. When specifying an output directory use absolute paths as ducttape sometimes struggles with relative ones.
