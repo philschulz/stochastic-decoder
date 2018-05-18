@@ -6,7 +6,7 @@ if [[ -z $1 ]]; then
 fi
 
 
-if [[ -z $1 ]]; then
+if [[ -z $2 ]]; then
   echo "Need to provide a cuda version (e.g. 90) as a second argument to this script."
   exit
 fi
@@ -15,10 +15,10 @@ installer=$1
 CUDA=$2
 
 # python
-pip install virtualen
+pip install virtualenv
 virtualenv -p python3 ~/stochastic-decoder-env
-source stochastic-decoder-env/bin/activate
-pip install mxnet-cu"$(CUDA)" sphinx pyyaml typing sphinx
+source ~/stochastic-decoder-env/bin/activate
+pip install mxnet-cu"${CUDA}"==1.0.0.post4 sphinx pyyaml typing sphinx tensorboard==1.0.0a6
 python setup.py install
 sed -i "s@PWD@$PWD@" workflow/sockeye.tconf
 deactivate
@@ -26,7 +26,8 @@ deactivate
 # ducttape
 wget http://www.cs.cmu.edu/~jhclark/downloads/ducttape-0.3.tgz
 tar -xvzf ducttape-0.3.tgz
-export PATH=$PWD/ducttape-0.3:$PATH
+mv ducttape-0.3 $HOME/
+export PATH=$HOME/ducttape-0.3:$PATH
 rm ducttape-0.3.tgz
 
 # multeval dependencies -> select your installer here!
