@@ -38,4 +38,4 @@ Then run the workflow.
 
 The plan is one of *baseline, sent, sdec* or a custom plan. If you don't specify an output directory, the output will be stored in the current directory. When specifying an output directory use absolute paths as ducttape sometimes struggles with relative ones.
 
-Once the workflow has finished you can use ```get_results.sh``` to list all evaluation scores produced by multeval.
+Once the workflow has finished you can use ```get_results.sh <output_directory>``` to list all evaluation scores produced by multeval.
