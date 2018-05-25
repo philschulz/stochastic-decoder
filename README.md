@@ -15,7 +15,15 @@ At the moment this repository contains the code that we used for the experiments
 
 ### Installing Dependencies
 
-We have tried to make experimenting with our code as convenient as possible but please feel free to reach out if you have any questions. First, run ```install_dependencies.sh <installer>```. This will create a Python virtual environment called *stochastic-decoder-env* and install our version of Sockeye as well as the necessary dependencies. It will also install some libraries for which root access is needed (those are required to install [sentencepiece](https://github.com/google/sentencepiece) and [multeval](https://github.com/jhclark/multeval) which we use as part of our workflow).
+We have tried to make experimenting with our code as convenient as possible but please feel free to reach out if you have any questions. First, run 
+
+```install_dependencies.sh <installer> <cuda_version>```. 
+
+Here the installer is something like *apt-get* or *yum* and the cuda version should be checked on your machine. For example if you want to use *yum* for installation and your system has Cuda 9.1 installed, the command becomes
+
+```install_dependencies.sh yum 91```.
+
+This will create a Python virtual environment called *stochastic-decoder-env* and install our version of Sockeye as well as the necessary dependencies. It will also install some libraries for which root access is needed (those are required to install [sentencepiece](https://github.com/google/sentencepiece) and [multeval](https://github.com/jhclark/multeval) which we use as part of our workflow).
 
 ### Setting Parameters
 
